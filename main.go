@@ -1,17 +1,25 @@
 package main
 
-import "fmt"
+import (
+    "errors"
+    "fmt"
+)
 
-func calculate(a, b int) (int, int) {
-    sum := a + b
-    difference := a - b
+func divide(a, b float64) (float64, error) {
+    if b == 0 {
+        return 0, errors.New("cannot divide by zero")
+    }
 
-    return sum, difference
+    return a / b, nil
 }
 
 func main() {
-    sum, difference := calculate(20, 5)
+    result, err := divide(10, 2)
 
-    fmt.Println("Sum:", sum)
-    fmt.Println("Difference:", difference)
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+
+    fmt.Println("Result:", result)
 }
