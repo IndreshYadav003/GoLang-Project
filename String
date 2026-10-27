@@ -1,0 +1,52 @@
+package main
+
+import (
+    "fmt"
+    "strings"
+    "unicode/utf8"
+)
+
+func validateUsername(username string) bool {
+    // Remove spaces from the beginning and end.
+    username = strings.TrimSpace(username)
+
+    // Reject an empty username.
+    if username == "" {
+        return false
+    }
+
+    // Count Unicode code points.
+    length := utf8.RuneCountInString(username)
+
+    // Username must contain 3 to 15 code points.
+    if length < 3 || length > 15 {
+        return false
+    }
+
+    // Allow only ASCII letters, digits, and underscores.
+    for _, char := range username {
+        isLowercase := char >= 'a' && char <= 'z'
+        isUppercase := char >= 'A' && char <= 'Z'
+        isDigit := char >= '0' && char <= '9'
+        isUnderscore := char == '_'
+
+        if !isLowercase &&
+            !isUppercase &&
+            !isDigit &&
+            !isUnderscore {
+            return false
+        }
+    }
+
+    return true
+}
+
+func main() {
+    username := "Indresh_123"
+
+    if validateUsername(username) {
+        fmt.Println("Valid username")
+    } else {
+        fmt.Println("Invalid username")
+    }
+}
