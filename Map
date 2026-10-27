@@ -1,0 +1,46 @@
+package main
+import "fmt"
+func main() {
+    // Create a map of student names and marks.
+    students := map[string]int{
+        "Rahul": 80,
+        "Amit":  75,
+        "Priya": 90,
+    }
+
+    // Display all students.
+    fmt.Println("All student records:")
+
+    for name, marks := range students {
+        fmt.Println("Name:", name, "| Marks:", marks)
+    }
+
+    // Search for a student.
+    searchName := "Rahul"
+
+    marks, exists := students[searchName]
+
+    if exists {
+        fmt.Println(searchName, "scored", marks, "marks")
+    } else {
+        fmt.Println(searchName, "was not found")
+    }
+
+    // Update a student's marks.
+    students["Rahul"] = 95
+
+    fmt.Println("Rahul's updated marks:", students["Rahul"])
+
+    // Add a new student.
+    students["Vikram"] = 85
+
+    fmt.Println("After adding Vikram:", students)
+
+    // Delete a student.
+    delete(students, "Amit")
+
+    fmt.Println("After deleting Amit:", students)
+
+    // Display the number of students.
+    fmt.Println("Total students:", len(students))
+}
